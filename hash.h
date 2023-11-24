@@ -21,6 +21,26 @@ struct MyStringHash {
     {
         // Add your code here
 
+        unsigned long long w[5]={};
+        int b = 1;
+        int in = 0;
+        HASH_INDEX_T s = 0;
+        int weight1 = 4;
+        for(int i = k.size()-1; i>=0; i--){
+          if(in>5){
+            w[weight1]=s;
+            b=1;
+            s=0;
+            weight1 = weight1-1;
+            in = 0;
+          }
+          s+= b * letterDigitToNumber(k[i]);
+          b=b*36;
+          in++;
+        }
+        w[weight1]=s;
+        return (rValues[0]*w[0]+rValues[1]*w[1]+rValues[2]*w[2]+rValues[3]*w[3]+rValues[4]*w[4]);
+
 
     }
 
@@ -29,6 +49,15 @@ struct MyStringHash {
     {
         // Add code here or delete this helper function if you do not want it
 
+          if(int(letter)>96){
+            return int(letter)-97;
+          }
+          else if(int(letter)>64){
+            return int(letter)-65;
+          }
+          else{
+            return int(letter)-48+26;
+          }
     }
 
     // Code to generate the random R values
